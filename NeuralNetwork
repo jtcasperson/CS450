@@ -1,0 +1,55 @@
+#import iris and random
+from sklearn import datasets
+iris = datasets.load_iris()
+import random
+
+# nodes (neurons)
+class Node:
+    result = 0
+
+#storage of nodes
+simplelist = []
+for count in xrange(len(iris['target_names'])):
+    x = Node()
+    x.attr = count
+    simplelist.append(x)
+
+# create list of weights
+weights = []
+for i in range(len(simplelist)):
+    for j in range(len(iris.data[0])):
+        a = random.uniform(-1, 1)
+        weights.append(a)
+
+print "Weights, ", weights
+print "length of weights:" , len(weights)
+
+# calculate flower type
+for i in range(len(iris.data)):
+    weight = 0
+    for j in range(len(simplelist)): # loop through each node
+        answer = 0 # result for each node
+        for k in range(len(iris.data[0])): # loop through each value
+            # caluculate num
+            answer += (iris.data[i][k] * weights[weight])
+            weight += 1;
+        print answer
+        if answer > 0:
+            answer = 1
+        else:
+            answer = 0
+        print "flower ", i, " ",  iris['target_names'][j], " ", answer
+
+print "weight" , weight
+
+
+
+print len(simplelist)
+#layer of nodes
+numLayers = 1
+
+#bias input
+biasInput = 0
+
+
+
